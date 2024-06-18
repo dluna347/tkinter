@@ -1,51 +1,38 @@
 from tkinter import *
 
-# function to convert miles to Km
-def miles_to_km(n):
-    """n = number of miles"""
-    kilometers = n * 1.60934
-    return int(kilometers)
+def miles_to_kilometers():
+    miles = float(miles_input.get())
+    km = miles * 1.609
+    kilometer_result_label.config(text=str(km))
 
-# function to clear "Enter Miles here"
-def clear_entry(event):
-    if input.get() == "Enter Miles":
-        input.delete(0, END)
 
-def on_calculate():
-    try:
-        value = float(entry_var.get())
-        kilometers = miles_to_km(value)
-        label_result.config(text=str(kilometers))
-    except ValueError:
-        label_result.config(text="Invalid input")
+window = Tk()
+window.title("Miles to kilometers converter")
+window.config(padx=20, pady=20)
 
-# setup tkinter
-main_window = Tk()
-main_window.title("Mile to Km Converter")
-main_window.resizable(False, False)
+miles_input = Entry(width=7)
+miles_input.grid(column=1, row=0)
 
-# create a StringVar to hold the entry data
-entry_var = StringVar()
+miles_label = Label(text="Miles")
+miles_label.grid(column=2, row=0)
 
-# create an Entry box for the user to enter the number of miles
-input = Entry(textvariable=entry_var)
-input.grid(row=0, column=0, padx=10, pady=10)
-input.insert(0, "Enter Miles")
-input.bind("<FocusIn>", clear_entry)
 
-label_miles = Label(text="Miles")
-label_miles.grid(row=0, column=1, padx=5, pady=10)
+is_equal_to_label = Label(text="is equal to")
+is_equal_to_label.grid(column=0, row=1)
 
-label_equal = Label(text="is equal to")
-label_equal.grid(row=1, column=0, padx=10, pady=5)
 
-label_result = Label(text="")
-label_result.grid(row=1, column=1, padx=5, pady=5)
+kilometer_result_label = Label(text="0")
+kilometer_result_label.grid(column=1, row=1)
 
-label_km = Label(text="Km")
-label_km.grid(row=1, column=2, padx=5, pady=5)
 
-calculate = Button(text="Calculate", command=on_calculate)
-calculate.grid(row=2, column=0, columnspan=3, padx=10, pady=10)
+kilometer_label = Label(text="Km")
+kilometer_label.grid(column=2, row=1)
 
-main_window.mainloop()
+
+calculate_button = Button(text="Calculate", command=miles_to_kilometers)
+calculate_button.grid(column=1, row=2)
+
+
+
+
+window.mainloop()
